@@ -720,7 +720,7 @@ class MailAndPackagesCard extends i {
         ${this._config.details !== false ? this.renderDetails(stateObj) : ""}
         ${this._config.image !== false ? this.renderImage(stateObj) : ""}
         ${this._config.camera !== false ? this.renderCamera(stateObj) : ""}
-        <span class="usps_update">V 0.9.0 Checked: ${stateObj.state}</span>
+        <span class="usps_update">V 0.9.1 Checked: ${stateObj.state}</span>
       </ha-card>
     `;
     }
@@ -774,7 +774,7 @@ class MailAndPackagesCard extends i {
     ${usps_mail
         ? b`
         <li class="item"><span class="mail-ha-icon">
-        <ha-icon icon="mdi:${mail_icon}"></ha-icon>
+        <span class="mail-badge"><ha-icon icon="mdi:${mail_icon}"></ha-icon></span>
         </span><a href="https://informeddelivery.usps.com/" title="Open the USPS Informed Delivery site" target="_blank"><span class="no-break">Mail: ${usps_mail}</span></a></li>
             `
             : ""}
@@ -950,6 +950,21 @@ class MailAndPackagesCard extends i {
                     height: 18px;
                     padding-right: 5px;
                     color: var(--paper-item-icon-color);
+                }
+
+                .mail-badge {
+                    display: inline-flex;
+                    width: 24px;
+                    height: 24px;
+                    align-items: center;
+                    justify-content: center;
+                    vertical-align: middle;
+                    background: #29438d;
+                    color: #fff;
+                }
+
+                .mail-badge ha-icon {
+                    --mdc-icon-size: 18px;
                 }
 
                 .carrier-logo {

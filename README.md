@@ -57,7 +57,7 @@ walmart_packages: sensor.mail_walmart_packages
 home_depot_packages: sensor.mail_home_depot_packages
 ```
 
-Each configured sensor displays a package icon, count, and link to the store's order history alongside the existing carriers. Leave a field unset to omit that store.
+Each configured sensor displays a service logo, count, and link to the store's order history alongside the existing carriers. Leave a field unset to omit that store.
 
 #### USPS Mail Image Display
 The mail images can be displayed by using the mail_today.gif directly or use a [local file camera entity](https://github.com/moralmunky/Home-Assistant-Mail-And-Packages/wiki/Example-Automations-and-Templates#camera). Use the blue toggle switches to turn either option on or off.
@@ -86,4 +86,4 @@ pnpm test
 
 Commit the source, lockfile, tests, and generated `dist/` files together. The editor is included in the main bundle; the editor file in `dist/` remains a compatibility entry point. Tests cover rendering, editor changes, relevant entity updates, missing entities, image recovery, and the actual bundled Lit renderer.
 
-Carrier rows use bundled service logos; Mail keeps its mailbox icon. Logos are included in the card bundle, so no external image requests or separate resource setup are needed. USPS, UPS, FedEx, and Amazon assets come from the existing custom card. Walmart uses its [official Spark](https://brandcenter.walmart.com/brand/brand-identity/spark), and Home Depot uses its [official logo](https://corporate.homedepot.com/media/home-depot-logojpg).
+Carrier rows use bundled service logos; Mail uses a white mailbox icon on a matching blue square badge. Logos are included in the card bundle, so no external image requests or separate resource setup are needed. USPS, UPS, FedEx, and Amazon assets come from the existing custom card. Walmart uses its [official Spark](https://brandcenter.walmart.com/brand/brand-identity/spark), and Home Depot uses its [official logo](https://corporate.homedepot.com/media/home-depot-logojpg).
