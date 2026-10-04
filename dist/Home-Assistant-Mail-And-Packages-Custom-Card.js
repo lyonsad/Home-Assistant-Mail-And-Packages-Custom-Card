@@ -94,16 +94,16 @@ class MailAndPackagesCard extends LitElement {
     }
 
     renderDetails(stateObj) {
-        const deliveries_message = this._config.deliveries_message ? this.hass.states[this._config.deliveries_message].state : false;
-        const packages_delivered = this._config.packages_delivered ? this.hass.states[this._config.packages_delivered].state : false;
-        const packages_in_transit = this._config.packages_in_transit ? this.hass.states[this._config.packages_in_transit].state : false;
-        const fedex_packages = this._config.fedex_packages ? this.hass.states[this._config.fedex_packages].state : false;
-        const ups_packages = this._config.ups_packages ? this.hass.states[this._config.ups_packages].state : false;
-        const usps_packages = this._config.usps_packages ? this.hass.states[this._config.usps_packages].state : false;
-        const amazon_packages = this._config.amazon_packages ? this.hass.states[this._config.amazon_packages].state : false;
+        const deliveries_message = this._config.deliveries_message ? this.hass.states[this._config.deliveries_message]?.state ?? 'unavailable' : false;
+        const packages_delivered = this._config.packages_delivered ? this.hass.states[this._config.packages_delivered]?.state ?? 'unavailable' : false;
+        const packages_in_transit = this._config.packages_in_transit ? this.hass.states[this._config.packages_in_transit]?.state ?? 'unavailable' : false;
+        const fedex_packages = this._config.fedex_packages ? this.hass.states[this._config.fedex_packages]?.state ?? 'unavailable' : false;
+        const ups_packages = this._config.ups_packages ? this.hass.states[this._config.ups_packages]?.state ?? 'unavailable' : false;
+        const usps_packages = this._config.usps_packages ? this.hass.states[this._config.usps_packages]?.state ?? 'unavailable' : false;
+        const amazon_packages = this._config.amazon_packages ? this.hass.states[this._config.amazon_packages]?.state ?? 'unavailable' : false;
         const walmart_packages = this._config.walmart_packages ? this.hass.states[this._config.walmart_packages]?.state ?? 'unavailable' : false;
         const home_depot_packages = this._config.home_depot_packages ? this.hass.states[this._config.home_depot_packages]?.state ?? 'unavailable' : false;
-        const usps_mail = this._config.usps_mail ? this.hass.states[this._config.usps_mail].state : false;
+        const usps_mail = this._config.usps_mail ? this.hass.states[this._config.usps_mail]?.state ?? 'unavailable' : false;
         
         const mail_icon = usps_mail > 0 ? 'mailbox-open-up' : 'mailbox-outline';
         const usps_icon = usps_packages > 0 ? 'package-variant' : 'package-variant-closed';
@@ -163,14 +163,14 @@ class MailAndPackagesCard extends LitElement {
     ? html`
         <li class="item"><span class="mail-ha-icon">
                 <ha-icon icon="mdi:${ups_icon}"></ha-icon>
-            </span><a href="https://wwwapps.ups.com/mcdp" title="Open the UPS MyChoice site" target="_blank"><span class="no-break">UPS: ${ups_packages}</span></a></li>
+            </span><a href="https://www.ups.com/us/en/track/ups-my-choice" title="Open the UPS MyChoice site" target="_blank"><span class="no-break">UPS: ${ups_packages}</span></a></li>
         `
         : ""}
         ${fedex_packages
         ? html`
         <li class="item"><span class="mail-ha-icon">
                 <ha-icon icon="mdi:${fedex_icon}"></ha-icon>
-            </span><a href="https://www.fedex.com/apps/fedextracking" title="Open the Fedex site" target="_blank"><span class="no-break">Fedex: ${fedex_packages}</span></a></li>
+            </span><a href="https://www.fedex.com/en-us/tracking.html" title="Open the Fedex site" target="_blank"><span class="no-break">Fedex: ${fedex_packages}</span></a></li>
             `
             : ""}
     ${amazon_packages
@@ -205,7 +205,10 @@ class MailAndPackagesCard extends LitElement {
             return html ``;
         }
         
-        const gif_sensor = this._config.gif_sensor ? this.hass.states[this._config.gif_sensor].state : false;
+        const gif_sensor = this.hass.states[gif]?.state;
+        if (!gif_sensor || gif_sensor === 'unknown' || gif_sensor === 'unavailable') {
+            return html ``;
+        }
         const lang = this.hass.selectedLanguage || this.hass.language;
 
         this.numberElements++;
@@ -220,14 +223,18 @@ class MailAndPackagesCard extends LitElement {
             return html ``;
         }
 
-        const cameraObjt = this._config.camera_entity in this.hass.states ? this.hass.states[this._config.camera_entity] : null;
-        const camera_url = this.hass.states[this._config.camera_entity].attributes.entity_picture;
+        const cameraObjt = this.hass.states[camera_entity];
+        const camera_url = cameraObjt?.attributes?.entity_picture;
+        if (!camera_url || cameraObjt.state === 'unknown' || cameraObjt.state === 'unavailable') {
+            return html ``;
+        }
+        const separator = camera_url.includes('?') ? '&' : '?';
 
         const lang = this.hass.selectedLanguage || this.hass.language;
 
         this.numberElements++;
         return html `
-        <img class="MailImg clear" src="${camera_url}&interval=30" />
+        <img class="MailImg clear" src="${camera_url}${separator}interval=30" />
     `;
     }
 
