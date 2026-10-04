@@ -581,4 +581,3 @@ export class MailAndPackagesCardEditor extends LitElement {
 }
 
 customElements.define("mail-and-packages-card-editor", MailAndPackagesCardEditor);
-

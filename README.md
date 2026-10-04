@@ -71,4 +71,3 @@ The mail images can be displayed by using the mail_today.gif directly or use a [
 The delivery message sensor, `sensor.mail_delieveries`, is not created by the [Mail and Packages Integration](https://github.com/moralmunky/Home-Assistant-Mail-And-Packages/wiki/Example-Automations-and-Templates#post-0115). You must create a [template sensor](https://www.home-assistant.io/integrations/template/). This is left out of the integration on purpose so they can customize as they see fit.
 
 <img src="https://github.com/moralmunky/Home-Assistant-Mail-And-Packages-Custom-Card/blob/master/img/visual-editor.png?raw=true" alt="Preview of visual-editor" />
-
