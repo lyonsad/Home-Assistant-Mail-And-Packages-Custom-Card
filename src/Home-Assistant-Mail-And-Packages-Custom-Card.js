@@ -105,7 +105,7 @@ class MailAndPackagesCard extends LitElement {
         ${this._config.details !== false ? this.renderDetails(stateObj) : ""}
         ${this._config.image !== false ? this.renderImage(stateObj) : ""}
         ${this._config.camera !== false ? this.renderCamera(stateObj) : ""}
-        <span class="usps_update">V 0.9.1 Checked: ${stateObj.state}</span>
+        <span class="usps_update">V 0.9.1 Checked: ${this.hass.formatEntityState ? this.hass.formatEntityState(stateObj) : stateObj.state}</span>
       </ha-card>
     `;
     }

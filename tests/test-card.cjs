@@ -86,6 +86,12 @@ for (const url of ['/api/camera_proxy/camera.mail?token=test', '/api/camera_prox
   assert.ok(card.render().includes(url + (url.includes('?') ? '&' : '?') + 'interval=30'));
   checks++;
 }
+card.setConfig({updated:'sensor.updated', image:false, camera:false});
+card.hass.formatEntityState = (stateObj) => 'formatted ' + stateObj.state;
+assert.ok(card.render().includes('Checked: formatted today'));
+delete card.hass.formatEntityState;
+assert.ok(card.render().includes('Checked: today'));
+checks++;
 card.setConfig({updated:'sensor.updated', camera:false, gif_sensor:'sensor.gif'});
 for (const state of [undefined, 'unknown', 'unavailable', '']) {
   card.hass.states['sensor.gif'] = state === undefined ? undefined : {state};
