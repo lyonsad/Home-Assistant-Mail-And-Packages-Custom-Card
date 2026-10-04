@@ -152,7 +152,7 @@ class MailAndPackagesCardEditor extends i {
 
         return b `
       <div class="card-config">
-    Version: 0.8.0
+    Version: 0.9.1
         <div>
           <paper-input
             label="Name"
@@ -720,7 +720,7 @@ class MailAndPackagesCard extends i {
         ${this._config.details !== false ? this.renderDetails(stateObj) : ""}
         ${this._config.image !== false ? this.renderImage(stateObj) : ""}
         ${this._config.camera !== false ? this.renderCamera(stateObj) : ""}
-        <span class="usps_update">V 0.9.1 Checked: ${stateObj.state}</span>
+        <span class="usps_update">V 0.9.1 Checked: ${this.hass.formatEntityState ? this.hass.formatEntityState(stateObj) : stateObj.state}</span>
       </ha-card>
     `;
     }
