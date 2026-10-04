@@ -49,6 +49,16 @@ image: false
 ```
 Switch to the visual editor and complete the setup by assigning the sensors you have enabled in the [Mail and Packages integration](https://github.com/moralmunky/Home-Assistant-Mail-And-Packages).
 
+#### Walmart and Home Depot
+Enable the Walmart and Home Depot package sensors in the integration, then select them in the card's visual editor. You can also add these optional fields to your card YAML (use your actual entity IDs):
+
+```yaml
+walmart_packages: sensor.mail_walmart_packages
+home_depot_packages: sensor.mail_home_depot_packages
+```
+
+Each configured sensor displays a package icon, count, and link to the store's order history alongside the existing carriers. Leave a field unset to omit that store.
+
 #### USPS Mail Image Display
 The mail images can be displayed by using the mail_today.gif directly or use a [local file camera entity](https://github.com/moralmunky/Home-Assistant-Mail-And-Packages/wiki/Example-Automations-and-Templates#camera). Use the blue toggle switches to turn either option on or off.
 
@@ -61,3 +71,4 @@ The mail images can be displayed by using the mail_today.gif directly or use a [
 The delivery message sensor, `sensor.mail_delieveries`, is not created by the [Mail and Packages Integration](https://github.com/moralmunky/Home-Assistant-Mail-And-Packages/wiki/Example-Automations-and-Templates#post-0115). You must create a [template sensor](https://www.home-assistant.io/integrations/template/). This is left out of the integration on purpose so they can customize as they see fit.
 
 <img src="https://github.com/moralmunky/Home-Assistant-Mail-And-Packages-Custom-Card/blob/master/img/visual-editor.png?raw=true" alt="Preview of visual-editor" />
+

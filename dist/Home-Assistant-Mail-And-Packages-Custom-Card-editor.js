@@ -72,6 +72,14 @@ export class MailAndPackagesCardEditor extends LitElement {
         return this._config.amazon_packages || "";
     }
 
+    get _walmart_packages() {
+        return this._config.walmart_packages || "";
+    }
+
+    get _home_depot_packages() {
+        return this._config.home_depot_packages || "";
+    }
+
     get _usps_mail() {
         return this._config.usps_mail || "";
     }
@@ -364,6 +372,66 @@ export class MailAndPackagesCardEditor extends LitElement {
                 </paper-listbox>
               </paper-dropdown-menu>
             `}
+              ${customElements.get("ha-entity-picker")
+            ? html`
+                <ha-entity-picker
+                label="Walmart Package Sensor"
+                .hass="${this.hass}"
+                .value="${this._walmart_packages}"
+                .configValue=${"walmart_packages"}
+                domain-filter="sensor"
+                @change="${this._valueChanged}"
+                allow-custom-entity
+              ></ha-entity-picker>
+            `
+          : html`
+              <paper-dropdown-menu
+                label="Walmart Package Sensor"
+                @value-changed="${this._valueChanged}"
+                .configValue="${"walmart_packages"}"
+              >
+                <paper-listbox
+                  slot="dropdown-content"
+                  .selected="${entities.indexOf(this._walmart_packages)}"
+                >
+                  ${entities.map((walmart_packages) => {
+                    return html`
+                      <paper-item>${walmart_packages}</paper-item>
+                    `;
+                  })}
+                </paper-listbox>
+              </paper-dropdown-menu>
+            `}
+              ${customElements.get("ha-entity-picker")
+            ? html`
+                <ha-entity-picker
+                label="Home Depot Package Sensor"
+                .hass="${this.hass}"
+                .value="${this._home_depot_packages}"
+                .configValue=${"home_depot_packages"}
+                domain-filter="sensor"
+                @change="${this._valueChanged}"
+                allow-custom-entity
+              ></ha-entity-picker>
+            `
+          : html`
+              <paper-dropdown-menu
+                label="Home Depot Package Sensor"
+                @value-changed="${this._valueChanged}"
+                .configValue="${"home_depot_packages"}"
+              >
+                <paper-listbox
+                  slot="dropdown-content"
+                  .selected="${entities.indexOf(this._home_depot_packages)}"
+                >
+                  ${entities.map((home_depot_packages) => {
+                    return html`
+                      <paper-item>${home_depot_packages}</paper-item>
+                    `;
+                  })}
+                </paper-listbox>
+              </paper-dropdown-menu>
+            `}
             ${customElements.get("ha-entity-picker")
           ? html`
               <ha-entity-picker
@@ -513,3 +581,4 @@ export class MailAndPackagesCardEditor extends LitElement {
 }
 
 customElements.define("mail-and-packages-card-editor", MailAndPackagesCardEditor);
+
