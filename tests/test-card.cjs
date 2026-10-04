@@ -11,6 +11,7 @@ const registry = new Map([['hui-masonry-view', View]]);
 const context = vm.createContext({Date, Event, __testLit: {LitElement, html, css:html}, customElements: {
   get: name => registry.get(name), define: (name, value) => registry.set(name, value)
 }});
+vm.runInContext(fs.readFileSync(root + 'src/carrier-logos.js', 'utf8').replace('export const', 'const'), context);
 vm.runInContext('const {LitElement, html, css} = __testLit;\n' + fs.readFileSync(root + 'src/Home-Assistant-Mail-And-Packages-Custom-Card.js', 'utf8').replace(/^import .*;\n/gm, '').replace(/^import .*;\n/gm, ''), context);
 const Card = registry.get('mail-and-packages-card');
 const card = new Card();
@@ -30,7 +31,7 @@ for (const state of ['0', 0, '2', 'unknown', 'unavailable', undefined]) {
   assert.ok(rendered.includes('Amazon: 3'));
   assert.ok(rendered.includes('https://www.walmart.com/orders'));
   assert.ok(rendered.includes('https://www.homedepot.com/myaccount/purchase-history'));
-  assert.ok(rendered.includes(state > 0 ? 'mdi:package-variant"' : 'mdi:package-variant-closed"'));
+  for (const name of ['Walmart', 'Home Depot', 'Amazon']) assert.ok(rendered.includes(`alt="${name} logo"`));
   checks++;
 }
 card.setConfig({updated:'sensor.updated', amazon_packages:'sensor.amazon', image:false, camera:false});

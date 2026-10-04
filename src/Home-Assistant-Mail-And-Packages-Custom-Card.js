@@ -1,3 +1,4 @@
+import { CARRIER_LOGOS } from './carrier-logos.js';
 import { LitElement, html } from 'lit';
 import './Home-Assistant-Mail-And-Packages-Custom-Card-editor.js';
 
@@ -104,7 +105,7 @@ class MailAndPackagesCard extends LitElement {
         ${this._config.details !== false ? this.renderDetails(stateObj) : ""}
         ${this._config.image !== false ? this.renderImage(stateObj) : ""}
         ${this._config.camera !== false ? this.renderCamera(stateObj) : ""}
-        <span class="usps_update">V 0.8.0 Checked: ${stateObj.state}</span>
+        <span class="usps_update">V 0.9.0 Checked: ${stateObj.state}</span>
       </ha-card>
     `;
     }
@@ -122,12 +123,6 @@ class MailAndPackagesCard extends LitElement {
         const usps_mail = this._config.usps_mail ? this.hass.states[this._config.usps_mail]?.state ?? 'unavailable' : false;
         
         const mail_icon = usps_mail > 0 ? 'mailbox-open-up' : 'mailbox-outline';
-        const usps_icon = usps_packages > 0 ? 'package-variant' : 'package-variant-closed';
-        const ups_icon = ups_packages > 0 ? 'package-variant' : 'package-variant-closed';
-        const fedex_icon = fedex_packages > 0 ? 'package-variant' : 'package-variant-closed';
-        const amazon_icon = amazon_packages > 0 ? 'package-variant' : 'package-variant-closed';
-        const walmart_icon = walmart_packages > 0 ? 'package-variant' : 'package-variant-closed';
-        const home_depot_icon = home_depot_packages > 0 ? 'package-variant' : 'package-variant-closed';
  
         this.numberElements++;
 
@@ -171,42 +166,42 @@ class MailAndPackagesCard extends LitElement {
     ${usps_packages
         ? html`
         <li class="item"><span class="mail-ha-icon">
-                <ha-icon icon="mdi:${usps_icon}"></ha-icon>
+                <img class="carrier-logo" src=${CARRIER_LOGOS.usps} alt="USPS logo" width="24" height="24">
             </span><a href="https://informeddelivery.usps.com/" title="Open the USPS Informed Delivery site" target="_blank"><span class="no-break">USPS: ${usps_packages}</span></a></li>
             `
             : ""}
     ${ups_packages
     ? html`
         <li class="item"><span class="mail-ha-icon">
-                <ha-icon icon="mdi:${ups_icon}"></ha-icon>
+                <img class="carrier-logo" src=${CARRIER_LOGOS.ups} alt="UPS logo" width="24" height="24">
             </span><a href="https://www.ups.com/us/en/track/ups-my-choice" title="Open the UPS MyChoice site" target="_blank"><span class="no-break">UPS: ${ups_packages}</span></a></li>
         `
         : ""}
         ${fedex_packages
         ? html`
         <li class="item"><span class="mail-ha-icon">
-                <ha-icon icon="mdi:${fedex_icon}"></ha-icon>
+                <img class="carrier-logo" src=${CARRIER_LOGOS.fedex} alt="FedEx logo" width="24" height="24">
             </span><a href="https://www.fedex.com/en-us/tracking.html" title="Open the Fedex site" target="_blank"><span class="no-break">Fedex: ${fedex_packages}</span></a></li>
             `
             : ""}
     ${amazon_packages
     ? html`
         <li class="item"><span class="mail-ha-icon">
-                <ha-icon icon="mdi:${amazon_icon}"></ha-icon>
+                <img class="carrier-logo" src=${CARRIER_LOGOS.amazon} alt="Amazon logo" width="24" height="24">
             </span><a href="https://www.amazon.com/gp/css/order-history/" title="Open the Amazon site" target="_blank"><span class="no-break">Amazon: ${amazon_packages}</span></a></li>
             `
             : ""}
     ${walmart_packages !== false
     ? html`
         <li class="item"><span class="mail-ha-icon">
-                <ha-icon icon="mdi:${walmart_icon}"></ha-icon>
+                <img class="carrier-logo" src=${CARRIER_LOGOS.walmart} alt="Walmart logo" width="24" height="24">
             </span><a href="https://www.walmart.com/orders" title="Open the Walmart site" target="_blank"><span class="no-break">Walmart: ${walmart_packages}</span></a></li>
             `
             : ""}
     ${home_depot_packages !== false
     ? html`
         <li class="item"><span class="mail-ha-icon">
-                <ha-icon icon="mdi:${home_depot_icon}"></ha-icon>
+                <img class="carrier-logo" src=${CARRIER_LOGOS.home_depot} alt="Home Depot logo" width="24" height="24">
             </span><a href="https://www.homedepot.com/myaccount/purchase-history" title="Open the Home Depot site" target="_blank"><span class="no-break">Home Depot: ${home_depot_packages}</span></a></li>
             `
             : ""}
@@ -340,6 +335,13 @@ class MailAndPackagesCard extends LitElement {
                     height: 18px;
                     padding-right: 5px;
                     color: var(--paper-item-icon-color);
+                }
+
+                .carrier-logo {
+                    width: 24px;
+                    height: 24px;
+                    object-fit: contain;
+                    vertical-align: middle;
                 }
 
                 .MailImg {

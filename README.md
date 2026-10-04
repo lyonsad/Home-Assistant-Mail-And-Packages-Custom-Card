@@ -85,3 +85,5 @@ pnpm test
 ```
 
 Commit the source, lockfile, tests, and generated `dist/` files together. The editor is included in the main bundle; the editor file in `dist/` remains a compatibility entry point. Tests cover rendering, editor changes, relevant entity updates, missing entities, image recovery, and the actual bundled Lit renderer.
+
+Carrier rows use bundled service logos; Mail keeps its mailbox icon. Logos are included in the card bundle, so no external image requests or separate resource setup are needed. USPS, UPS, FedEx, and Amazon assets come from the existing custom card. Walmart uses its [official Spark](https://brandcenter.walmart.com/brand/brand-identity/spark), and Home Depot uses its [official logo](https://corporate.homedepot.com/media/home-depot-logojpg).
