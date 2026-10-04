@@ -1,7 +1,7 @@
 # Home-Assistant-Mail-And-Packages-Custom-Card
 A Custom Lovelace card to pull together the mail and packages sensors.
 
-<img src="https://github.com/moralmunky/Home-Assistant-Mail-And-Packages-Custom-Card/blob/master/img/card-image.png?raw=true" alt="Preview of card" />
+<img src="https://github.com/lyonsad/Home-Assistant-Mail-And-Packages-Custom-Card/blob/master/img/card-image.png?raw=true" alt="Preview of card" />
 
 ## Lovelace GUI Setup
 
@@ -23,7 +23,7 @@ type: Javascript Module
 
 [HACS](https://hacs.xyz) will install the files and add an entry in the Lovelace resource
 * Have [HACS](https://hacs.xyz) installed in your instance of HASS
-* Add URL: **https://github.com/moralmunky/Home-Assistant-Mail-And-Packages-Custom-Card** as a custom repository with Type: **LOVELACE**
+* Add URL: **https://github.com/lyonsad/Home-Assistant-Mail-And-Packages-Custom-Card** as a custom repository with Type: **LOVELACE**
 * Navigate to the Frontend directory
 * Search for Mail and Packages, then choose install
 * You may need to empty your browser cache for the frontend to recognize the new files.
@@ -70,4 +70,18 @@ The mail images can be displayed by using the mail_today.gif directly or use a [
 #### Delivery Message Sensor
 The delivery message sensor, `sensor.mail_delieveries`, is not created by the [Mail and Packages Integration](https://github.com/moralmunky/Home-Assistant-Mail-And-Packages/wiki/Example-Automations-and-Templates#post-0115). You must create a [template sensor](https://www.home-assistant.io/integrations/template/). This is left out of the integration on purpose so they can customize as they see fit.
 
-<img src="https://github.com/moralmunky/Home-Assistant-Mail-And-Packages-Custom-Card/blob/master/img/visual-editor.png?raw=true" alt="Preview of visual-editor" />
+<img src="https://github.com/lyonsad/Home-Assistant-Mail-And-Packages-Custom-Card/blob/master/img/visual-editor.png?raw=true" alt="Preview of visual-editor" />
+
+## Maintaining this fork
+
+This fork preserves the original summary layout and adds Walmart and Home Depot counts. Stable numbered releases are installed through HACS. Lit is bundled locally in the downloaded card; no external script host is required.
+
+Development requires Node.js 20.19 or newer and pnpm. Edit the files in `src/`, then run:
+
+```sh
+pnpm install --frozen-lockfile
+pnpm build
+pnpm test
+```
+
+Commit the source, lockfile, tests, and generated `dist/` files together. The editor is included in the main bundle; the editor file in `dist/` remains a compatibility entry point. Tests cover rendering, editor changes, relevant entity updates, missing entities, image recovery, and the actual bundled Lit renderer.

@@ -1,0 +1,19 @@
+{
+  "name": "mail-and-packages-card",
+  "version": "0.8.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "node tests/test-card.cjs && node tests/test-dom.mjs"
+  },
+  "dependencies": {
+    "lit": "3.3.3"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "16.0.3",
+    "rollup": "4.64.0",
+    "happy-dom": "20.14.5"
+  }
+}
+
